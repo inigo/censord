@@ -1,15 +1,18 @@
-<div class="lift:surround?with=default;at=content" xmlns:f="http://namespaces.surguy.net/binding" xmlns:lift="http://liftweb.net">
+<div class="lift:surround?with=default;at=content">
     <div id="list">
         <p>
             Current words:
         </p>
         <table>
-            <tbody>
-            <lift:words.list>
-                <tr><td><f:text/></td><input type="checkbox"/></tr>
-            </lift:words.list>
+            <tbody class="lift:words.list">
+                <tr class="line"><td class="word"></td><input type="checkbox"/></tr>
             </tbody>
         </table>
     </div>
+
+    <form method="post" action="index.html">
+        <textarea id="newWords" name="newWords"></textarea>
+        <input type="submit" value="Add words"/>
+    </form>
 </div>
 
