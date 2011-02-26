@@ -1,5 +1,61 @@
 <div class="lift:surround?with=default;at=content">
-    <lift:OpenID.renderForm/>
+
+    <head>
+        <style type="text/css">
+            fieldset {border-style:none;}
+            img {border-style:none;}
+
+            form.openid ul { text-align:center; list-style-type:none; display:inline;}
+            form.openid ul li {float:left; padding:4px}
+            form.openid ul li span {padding:0 1em 0 3px}
+            form.openid fieldset {clear:both; padding:1em 0}
+            form.openid div+fieldset {display:none}
+            form.openid label {display:block; font-weight:bold; font-size:larger; margin-bottom:.5em}
+            input[name=openid_username] {width:8em}
+            input[name=openid_identifier] {width:18em}
+            form.openid ul li.highlight { -moz-border-radius:4px; -webkit-border-radius:4px; background-color: #FD6}
+            form.openid fieldset div {font-family:arial;-moz-border-radius:4px; -webkit-border-radius:4px;
+                                      background: #DCDCDC url(images/fadegrey.png); padding:10px;display:inline-block}
+            form.openid input[type='submit'] {margin-left:1em;}
+
+            .openid_logo{color:#F7931E;padding:6px 0px 8px 28px; background: url(images/openidico.png) no-repeat}
+
+            #openid_login{float:left; font-size:larger; width:30%; margin:2em 1em; text-align:center}
+            #openid_login div{margin-top:0.5em}
+            #openid_login div+span{font-size:smaller}
+        </style>
+        <script type="text/javascript" src="/static/script/jquery.openid.js"></script>
+        <script type="text/javascript"> $(document).ready(function() { openid.init('openIdUrl'); }); </script>
+    </head>
+
+
+    <form action="/openid/login" method="post" id="openid_form">
+        <div>
+            <ul>
+                <li title="OpenID"><img src="/images/openidW.png" alt="icon"/>
+                    <span><strong>http://{your-openid-url}</strong></span></li>
+                <li title="Google">
+                    <img src="/images/googleW.png" alt="icon"/><span>https://www.google.com/accounts/o8/id</span></li>
+                <li title="Yahoo">
+                    <img src="/images/yahooW.png" alt="icon"/><span>http://yahoo.com/</span></li>
+                <li title="AOL screen name">
+                    <img src="/images/aolW.png" alt="icon"/><span>http://openid.aol.com/<strong>username</strong></span>
+                </li>
+            </ul>
+        </div>
+        <fieldset>
+            <label for="openid_username">Enter your <span>Provider user name</span></label>
+
+            <div><span></span><input type="text" name="openid_username"/><span></span>
+                <input type="submit" value="Login"/></div>
+        </fieldset>
+        <fieldset>
+            <label for="openid_identifier">Enter your <a href="http://openid.net">OpenID</a></label>
+
+            <div><input type="text" name="openid_identifier" id="openid_identifier"/>
+                <input type="submit" value="Login"/></div>
+        </fieldset>
+    </form>
 </div>
 
 
