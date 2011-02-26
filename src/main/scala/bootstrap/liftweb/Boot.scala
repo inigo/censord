@@ -60,6 +60,9 @@ class Boot {
     LiftRules.loggedInTest = Full(() => User.loggedIn_?)
 
     S.addAround(DB.buildLoanWrapper)
+
+    // Create database tables
+    Schemifier.schemify(true, Schemifier.infoF _, Phrase)
   }
 
   /**

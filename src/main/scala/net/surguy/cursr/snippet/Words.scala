@@ -3,6 +3,7 @@ package net.surguy.cursr.snippet
 import xml.NodeSeq
 import net.liftweb.util.BindHelpers._
 import net.liftweb.util.CssBind
+import net.surguy.cursr.model.Phrase
 
 /**
  * Manage the list of words that should be checked for.
@@ -12,10 +13,5 @@ import net.liftweb.util.CssBind
  */
 
 class Words {
-  val words = List( Word("naughty"), Word("foolish"), Word("bad"))
-
-  def list(): CssBind = ".line *" #> words.map( ".word" #> _.text )
-
+  def list(): CssBind = ".line *" #> Phrase.findAll.map( ".word" #> _.word )
 }
-
-case class Word(text: String)
