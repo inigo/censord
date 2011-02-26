@@ -8,3 +8,8 @@ Build and run with SBT:
 
 or Maven:
     mvn jetty:run
+
+or with continuous deployment via SBT and JRebel:
+    java -noverify -javaagent:[insert jrebel dir]/jrebel.jar -Xmx768M -Drebel.lift_plugin=true -jar [insert sbt dir]/sbt-launch.jar 
+    jetty-run
+    ~ prepare-webapp
