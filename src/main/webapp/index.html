@@ -1,10 +1,14 @@
-<div class="lift:surround?with=default;at=content">
+<div class="lift:surround?with=default;at=content" xmlns:f="" xmlns:lift="http://liftweb.net">
     <div id="list">
         <p>
             Current words:
         </p>
         <table>
-            <tbody class="lift:words.list"/>
+            <tbody>
+            <lift:words.list>
+                <tr><td><f:text/></td><input type="checkbox"/></tr>
+            </lift:words.list>
+            </tbody>
         </table>
     </div>
 </div>

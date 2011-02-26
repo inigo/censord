@@ -1,16 +1,21 @@
 package net.surguy.cursr.snippet
 
+import xml.NodeSeq
+import net.liftweb.util.BindHelpers._
+
 /**
- * @todo Add some documentation!
+ * Manage the list of words that should be checked for
  *
  * @author Inigo Surguy
  * @created 26/02/2011 11:39
  */
 
 class Words {
-  val words = List( Word("silly"), Word("foolish"), Word("wrong"))
+  val words = List( Word("silly"), Word("foolish"), Word("bad"))
 
-  def list() = for (word <- words) yield <tr><td>{ word.text }</td><td><input type="checkbox"/></td></tr>
+  def list(xhtml: NodeSeq): NodeSeq =
+    words.flatMap(word => bind("f", xhtml, "text" --> word.text))
+
 }
 
 case class Word(text: String)
