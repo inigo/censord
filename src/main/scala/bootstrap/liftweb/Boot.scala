@@ -11,6 +11,7 @@ import _root_.net.liftweb.mapper.{DB, ConnectionManager, Schemifier, DefaultConn
 import _root_.java.sql.{Connection, DriverManager}
 import _root_.net.surguy.censord.model._
 import net.surguy.censord.Checker
+import net.liftweb.openid.SimpleOpenIDVendor
 
 
 /**
@@ -40,14 +41,18 @@ class Boot {
 
     // where to search for snippets
     LiftRules.addToPackages("net.surguy.censord")
-    Schemifier.schemify(true, Schemifier.infoF _, User)
+//    Schemifier.schemify(true, Schemifier.infoF _, User)
 
     // Build SiteMap
     def sitemap() = SiteMap(
-      Menu("Home") / "index" >> User.AddUserMenusAfter, // Simple menu form
+      Menu("Home") / "index", // Simple menu form
+      Menu("Login") / "login",
       Menu(Loc("Static", Link(List("static"), true, "/static/index"), "Static Content")))
 
-    LiftRules.setSiteMapFunc(() => User.sitemapMutator(sitemap()))
+    LiftRules.setSiteMapFunc(() => sitemap())
+
+    // Allow OpenID login
+    LiftRules.dispatch.append(SimpleOpenIDVendor.dispatchPF)
 
     /* Show the spinny image when an Ajax call starts */
     LiftRules.ajaxStart = Full(() => LiftRules.jsArtifacts.show("ajax-loader").cmd)
@@ -57,7 +62,7 @@ class Boot {
 
     LiftRules.early.append(makeUtf8)
 
-    LiftRules.loggedInTest = Full(() => User.loggedIn_?)
+//    LiftRules.loggedInTest = Full(() => User.loggedIn_?)
 
     S.addAround(DB.buildLoanWrapper)
 
