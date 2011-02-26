@@ -1,6 +1,5 @@
 package net.surguy.cursr.snippet
 
-import xml.NodeSeq
 import net.liftweb.util.BindHelpers._
 import net.liftweb.util.CssBind
 import net.surguy.cursr.model.Phrase
