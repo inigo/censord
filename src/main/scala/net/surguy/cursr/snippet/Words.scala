@@ -14,7 +14,7 @@ import net.liftweb.util.CssBind
 class Words {
   val words = List( Word("naughty"), Word("foolish"), Word("bad"))
 
-  def list(): CssBind = ".line *" #> words.map( word => ".word" #> word.text )
+  def list(): CssBind = ".line *" #> words.map( ".word" #> _.text )
 
 }
 
