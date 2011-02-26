@@ -1,0 +1,10 @@
+Cursr - a profanity checking web service.
+
+Building
+--------
+
+Build and run with SBT:
+    sbt update ~jetty-run
+
+or Maven:
+    mvn jetty:run
