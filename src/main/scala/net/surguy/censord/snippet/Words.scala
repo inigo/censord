@@ -12,5 +12,7 @@ import net.surguy.censord.model.Phrase
  */
 
 class Words {
-  def list(): CssBind = ".line *" #> Phrase.findAll.map( ".word" #> _.word )
+  def list(): CssBind = ".line *" #> Phrase.findAll.map( w => ".word" #> w.word
+    & ".stemming" #> <input type="checkbox" checked={if (w.stemming.is) "checked" else null} /> )
+  // @todo There must be a helper method to create checkboxes
 }
