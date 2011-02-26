@@ -11,8 +11,7 @@ import _root_.net.liftweb.mapper.{DB, ConnectionManager, Schemifier, DefaultConn
 import _root_.java.sql.{Connection, DriverManager}
 import _root_.net.surguy.censord.model._
 import net.surguy.censord.Checker
-import net.liftweb.openid.SimpleOpenIDVendor
-
+import net.liftweb.openid.{OpenIDUser, SimpleOpenIDVendor}
 
 /**
  * A class that's instantiated early and run.  It allows the application
@@ -62,7 +61,7 @@ class Boot {
 
     LiftRules.early.append(makeUtf8)
 
-//    LiftRules.loggedInTest = Full(() => User.loggedIn_?)
+    LiftRules.loggedInTest = Full(() => SimpleOpenIDVendor.currentUser.isDefined )
 
     S.addAround(DB.buildLoanWrapper)
 
