@@ -1,0 +1,69 @@
+/* Ajax */
+
+#ajax-loader {
+    display: none;
+    margin-bottom: 0px;
+    margin-left: 5px;
+}
+
+/* Body */
+
+body {
+   background: #f66;
+   font-family: Lucida Sans, Verdana, sans-serif;
+}
+
+#container {
+   background: #ffffff;
+   margin: 1em;
+   padding: 1em;
+   box-shadow: 4px 4px 3px 3px #966;
+}
+
+/* Title */
+
+h1 {
+   font-size: 1.6em;
+   text-align: center;
+   margin-bottom: 1em;
+}
+
+/* Menu */
+
+#menu {
+   background: #eee;
+   padding: 0.2em;
+}
+
+#menu li {
+  display: inline-block;
+}
+
+#menu a {
+   display: inline-block;
+   margin: 0.2em 1.8em 0.2em 0.2em;
+   padding: 0.2em 1em;
+   background: #ddd;
+   box-shadow: 1px 1px 1px 1px #999;
+}
+
+#menu a:hover {
+   background: #eee;
+}
+
+#menu a:active {
+   box-shadow: inset 1px 1px 1px 1px #999;
+}
+
+#menu a {
+   text-decoration: none;
+   color: black;
+   cursor: hand;
+}
+
+/* Content */
+
+#contentContainer {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
