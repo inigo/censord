@@ -1,4 +1,4 @@
-package net.surguy.cursr {
+package net.surguy.censord {
 package snippet {
 
 import org.specs._

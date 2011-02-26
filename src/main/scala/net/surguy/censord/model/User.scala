@@ -1,4 +1,4 @@
-package net.surguy.cursr {
+package net.surguy.censord {
 package model {
 
 import _root_.net.liftweb.mapper._

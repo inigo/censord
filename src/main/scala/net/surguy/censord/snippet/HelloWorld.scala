@@ -1,11 +1,11 @@
-package net.surguy.cursr {
+package net.surguy.censord {
 package snippet {
 
 import _root_.scala.xml.{NodeSeq, Text}
 import _root_.net.liftweb.util._
 import _root_.net.liftweb.common._
 import _root_.java.util.Date
-import net.surguy.cursr.lib._
+import net.surguy.censord.lib._
 import Helpers._
 
 class HelloWorld {

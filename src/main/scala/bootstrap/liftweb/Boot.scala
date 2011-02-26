@@ -9,8 +9,8 @@ import _root_.net.liftweb.sitemap.Loc._
 import Helpers._
 import _root_.net.liftweb.mapper.{DB, ConnectionManager, Schemifier, DefaultConnectionIdentifier, StandardDBVendor}
 import _root_.java.sql.{Connection, DriverManager}
-import _root_.net.surguy.cursr.model._
-import net.surguy.cursr.Checker
+import _root_.net.surguy.censord.model._
+import net.surguy.censord.Checker
 
 
 /**
@@ -39,7 +39,7 @@ class Boot {
     LiftRules.dispatch.append(Checker) // stateful -- associated with a servlet container session
 
     // where to search for snippets
-    LiftRules.addToPackages("net.surguy.cursr")
+    LiftRules.addToPackages("net.surguy.censord")
     Schemifier.schemify(true, Schemifier.infoF _, User)
 
     // Build SiteMap

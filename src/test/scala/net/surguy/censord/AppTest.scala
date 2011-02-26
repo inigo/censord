@@ -1,4 +1,4 @@
-package net.surguy.cursr
+package net.surguy.censord
 
 import _root_.java.io.File
 import _root_.junit.framework._

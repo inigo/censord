@@ -1,4 +1,4 @@
-package net.surguy.cursr
+package net.surguy.censord
 
 import model.Phrase
 import net.liftweb.http._

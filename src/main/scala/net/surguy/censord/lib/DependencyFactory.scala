@@ -1,4 +1,4 @@
-package net.surguy.cursr {
+package net.surguy.censord {
 package lib {
 
 import net.liftweb._

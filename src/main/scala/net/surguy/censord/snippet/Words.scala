@@ -1,8 +1,8 @@
-package net.surguy.cursr.snippet
+package net.surguy.censord.snippet
 
 import net.liftweb.util.BindHelpers._
 import net.liftweb.util.CssBind
-import net.surguy.cursr.model.Phrase
+import net.surguy.censord.model.Phrase
 
 /**
  * Manage the list of words that should be checked for.

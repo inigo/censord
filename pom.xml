@@ -3,11 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.surguy</groupId>
-    <artifactId>cursr</artifactId>
+    <artifactId>censord</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>cursr</name>
+    <name>censord</name>
     <description>Profanity checking web service</description>
-    <url>https://github.com/inigo/cursr</url>
+    <url>https://github.com/inigo/censord</url>
     <packaging>war</packaging>
     <inceptionYear>2011</inceptionYear>
 
@@ -328,9 +328,9 @@
     </licenses>
 
     <scm>
-        <developerConnection>scm:git:git@github.com:inigo/cursr.git</developerConnection>
-        <connection>scm:git:git@github.com:inigo/cursr.git</connection>
-        <url>git@github.com:inigo/cursr.git</url>
+        <developerConnection>scm:git:git@github.com:inigo/censord.git</developerConnection>
+        <connection>scm:git:git@github.com:inigo/censord.git</connection>
+        <url>git@github.com:inigo/censord.git</url>
     </scm>
 
 </project>
