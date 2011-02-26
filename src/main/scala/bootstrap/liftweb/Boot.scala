@@ -10,6 +10,7 @@ import Helpers._
 import _root_.net.liftweb.mapper.{DB, ConnectionManager, Schemifier, DefaultConnectionIdentifier, StandardDBVendor}
 import _root_.java.sql.{Connection, DriverManager}
 import _root_.net.surguy.cursr.model._
+import net.surguy.cursr.Checker
 
 
 /**
@@ -19,8 +20,7 @@ import _root_.net.surguy.cursr.model._
 class Boot {
   def boot {
     if (!DB.jndiJdbcConnAvailable_?) {
-      val vendor = 
-	new StandardDBVendor(Props.get("db.driver") openOr "org.h2.Driver",
+      val vendor = new StandardDBVendor(Props.get("db.driver") openOr "org.h2.Driver",
 			     Props.get("db.url") openOr 
 			     "jdbc:h2:lift_proto.db;AUTO_SERVER=TRUE",
 			     Props.get("db.user"), Props.get("db.password"))
@@ -30,30 +30,30 @@ class Boot {
       DB.defineConnectionManager(DefaultConnectionIdentifier, vendor)
     }
 
-    // where to search snippet
+    // Use HTML 5 rendering rather than XHTML rendering - this makes the behaviour of the words list change!
+//    LiftRules.htmlProperties.default.set((r: Req) => new Html5Properties(r.userAgent))
+
+    // Use the Checker object for REST dispatch - this is stateful, but the "S" object is not populated
+    // when using the statelessDispatchTable, so the way we're retrieving parameters doesn't work
+//    LiftRules.statelessDispatchTable.append(Checker)
+    LiftRules.dispatch.append(Checker) // stateful -- associated with a servlet container session
+
+    // where to search for snippets
     LiftRules.addToPackages("net.surguy.cursr")
     Schemifier.schemify(true, Schemifier.infoF _, User)
 
     // Build SiteMap
     def sitemap() = SiteMap(
       Menu("Home") / "index" >> User.AddUserMenusAfter, // Simple menu form
-      // Menu with special Link
-      Menu(Loc("Static", Link(List("static"), true, "/static/index"), 
-	       "Static Content")))
+      Menu(Loc("Static", Link(List("static"), true, "/static/index"), "Static Content")))
 
     LiftRules.setSiteMapFunc(() => User.sitemapMutator(sitemap()))
 
-    /*
-     * Show the spinny image when an Ajax call starts
-     */
-    LiftRules.ajaxStart =
-      Full(() => LiftRules.jsArtifacts.show("ajax-loader").cmd)
+    /* Show the spinny image when an Ajax call starts */
+    LiftRules.ajaxStart = Full(() => LiftRules.jsArtifacts.show("ajax-loader").cmd)
 
-    /*
-     * Make the spinny image go away when it ends
-     */
-    LiftRules.ajaxEnd =
-      Full(() => LiftRules.jsArtifacts.hide("ajax-loader").cmd)
+    /* Make the spinny image go away when it ends */
+    LiftRules.ajaxEnd = Full(() => LiftRules.jsArtifacts.hide("ajax-loader").cmd)
 
     LiftRules.early.append(makeUtf8)
 
