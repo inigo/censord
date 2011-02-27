@@ -1,7 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:lift="http://liftweb.net/">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-    <!-- @todo Different title per page - see http://stackoverflow.com/questions/5007236/changing-title-with-lift -->
     <title>censord - a profanity checking web service</title>
     <link rel="stylesheet" href="/static/css/reset.css"/>
     <link rel="stylesheet" href="/static/css/censord.css"/>
@@ -11,7 +10,7 @@
 <div id="container">
     <div id="title">
         <h1 class="alt">censord<img alt="" id="ajax-loader" src="/images/ajax-loader.gif"/></h1>
-        <span class="lift:OpenID.user"></span>
+        <span class="lift:currentUserSnippet.user"></span>
     </div>
 
     <div id="menu">

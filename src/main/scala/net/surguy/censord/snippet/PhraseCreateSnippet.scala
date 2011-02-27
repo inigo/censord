@@ -11,7 +11,7 @@ import java.util.Date
  * @created 26/02/2011 18:11
  */
 
-object WordScreen extends LiftScreen {
+object PhraseCreateSnippet extends LiftScreen {
   // @todo There must be a more concise way of specifying that we're using a textarea?
   val words = new Field {
     type ValueType = String

@@ -14,7 +14,7 @@ import _root_.net.liftweb.http.SHtml._
  * @author Inigo Surguy
  * @created 26/02/2011 11:39
  */
-class Words {
+class PhrasesSnippet {
 
   def list(): CssBind = ".line *" #> Phrase.findAll.map(
     w => ".word *" #> w.word

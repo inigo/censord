@@ -10,7 +10,7 @@ import net.surguy.censord.LocalOpenIDVendor
  * @author Inigo Surguy
  * @created 26/02/2011 20:39
  */
-class OpenID {
+class CurrentUserSnippet {
   def renderForm(xhtml: NodeSeq) : NodeSeq = LocalOpenIDVendor.loginForm
 
   def user(xhtml: NodeSeq) : NodeSeq = LocalOpenIDVendor.currentUser match {

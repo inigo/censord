@@ -26,7 +26,7 @@ import net.liftweb.http.js.JsCmds.{Run, SetHtml}
  * @author Inigo Surguy
  * @created 27/02/2011 14:46
  */
-class ListAllowedUser extends Logger {
+class AllowedUserSnippet extends Logger {
 
   // @todo Don't allow users to delete or disallow themselves
   def list(): CssBind = ".line *" #> AllowedUser.findAll.map(
