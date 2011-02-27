@@ -12,23 +12,18 @@ import java.util.Date
  */
 
 object WordScreen extends LiftScreen {
+  // @todo There must be a more concise way of specifying that we're using a textarea?
   val words = new Field {
     type ValueType = String
-    override def name = "Comma-separated words"
+    override def name = "Add new words (comma-separated)"
     override implicit def manifest = buildIt[String]
     override def default = ""
     override def toForm = SHtml.textarea(is, set _)
     override def validations = List(valMinLen(1, "You must supply a word"), valMaxLen(50, "Too many words!"))
   }
 
-
   def finish() {
-    // @todo Dupes code in RestApi
-    for (word <- words.is.split(","); val trimmed = word.trim if trimmed.length > 0) {
-      val newPhrase = Phrase.create
-      newPhrase.word(trimmed).stemming( trimmed.endsWith("*") ).createdAt( new Date() )
-      newPhrase.save()
-    }
+    Phrase.createMultiplePhrases(words.is)
     S.notice("New words created")
   }
 }

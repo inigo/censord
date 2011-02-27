@@ -18,14 +18,17 @@ import net.liftweb.http.js.JsCmd
 import net.liftweb.http.js.JsCmds.{Run, SetHtml}
 
 /**
- * @todo Add some documentation!
+ * Display the current list of users, toggle whether they're allowed to use the system or not,
+ * and allow deletion of users.
+ * <p>
+ * The user list is those users who have ever successfully logged into the system via OpenID.
  *
  * @author Inigo Surguy
  * @created 27/02/2011 14:46
  */
-
 class ListAllowedUser extends Logger {
 
+  // @todo Don't allow users to delete or disallow themselves
   def list(): CssBind = ".line *" #> AllowedUser.findAll.map(
     w => ".username *" #> w.username
        & ".createdAt *" #> TimeHelpers.dateFormatter.format(w.createdAt.is)

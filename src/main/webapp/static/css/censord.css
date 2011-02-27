@@ -104,3 +104,22 @@ h1 {
 #list button {
   margin-left: 0.4em;
 }
+
+/* Specific forms */
+
+#createNewWords {
+  border-top: solid 1px #aaa;
+  margin-top: 2em;
+  padding-top: 1em;
+}
+
+#createNewWords td {
+  vertical-align: middle;
+}
+
+#createNewWords textarea {
+  margin-left: 1em;
+  height: 5em;
+  width: 25em;
+}
+
