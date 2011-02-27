@@ -10,6 +10,9 @@ import net.liftweb.http.js.JsCmds.SetHtml
 import net.liftweb.common.Logger
 import java.util.Date
 import xml.{Group, Text}
+import net.liftweb.http.js.jquery.JqJE.Jq
+import net.liftweb.http.js.JE.ParentOf
+import net.liftweb.http.js.jquery.JqJsCmds.FadeOut
 
 /**
  * @todo Add some documentation!
@@ -34,7 +37,10 @@ class ListAllowedUser extends Logger {
             }))
           }
        & ".allowed [class+]" #> { if (w.allowed.is) "good" else "bad" }
-       & ".delete [href]" #> ("delete/" + w.primaryKeyField.is)
+       & ".delete *" #> ajaxButton("Delete", {() =>
+//          w.delete_!
+          SetHtml( "line_"+w.id.is, Text(""))
+        })
   )
 
 }
