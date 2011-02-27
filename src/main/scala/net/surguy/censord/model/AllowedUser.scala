@@ -28,9 +28,11 @@ class AllowedUser extends LongKeyedMapper[AllowedUser] {
  */
 object AllowedUser extends AllowedUser with LongKeyedMetaMapper[AllowedUser] with Logger {
 
-  def isAllowed(username: Box[Identifier]): Boolean = username match {
-    case Full(name) => find(By(AllowedUser.allowed, true)).isDefined
-    case _ => false
+  def isAllowed(username: Box[Identifier]): Boolean = {
+    username match {
+      case Full(name) => find(By(AllowedUser.username, name.getIdentifier), By(AllowedUser.allowed, true)).isDefined
+      case _ => false
+    }
   }
 
   def ensureDefaultUser() = {

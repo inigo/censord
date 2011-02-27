@@ -41,44 +41,20 @@ class Boot {
 
     // where to search for snippets
     LiftRules.addToPackages("net.surguy.censord")
-//    Schemifier.schemify(true, Schemifier.infoF _, User)
 
-//    val loggedIn = If( () => AllowedUser.isAllowed(SimpleOpenIDVendor.currentUser),
-//      () => if (SimpleOpenIDVendor.currentUser.isEmpty) RedirectResponse("/login") else RedirectResponse("/static/notAuthorized") )
-
-    val loggedIn = If(() => true, () => RedirectResponse("/login"))
-
-    val m : Menu = Menu(Loc("Profile", "/static/protected" :: Nil, "someProfileText", loggedIn))
-    val profileMenu = Menu(Loc("static", "/static/index" :: Nil, "/static/index", loggedIn))
+    val loggedIn = If( () => AllowedUser.isAllowed(SimpleOpenIDVendor.currentUser),
+      () => if (SimpleOpenIDVendor.currentUser.isEmpty) RedirectResponse("/login") else RedirectResponse("/static/notAuthorized") )
 
     //  Menu.param("Show User", "Show User", s => User.find(s), u => u.name) / "user"
     //  Will match: /user/8
 
+    // Format documented on the Wiki at http://www.assembla.com/wiki/show/liftweb/SiteMap
     def sitemap() = SiteMap(
-      Menu(S ? "Home") / "index" >> If(() => false, RedirectResponse("/login")),
-      Menu(S ? "Login") / "login",
-      Menu(S ? "Static") / "static" / "index" >> If(() => false, RedirectResponse("/login")),
-      Menu(S ? "Zog") / "static" / "zog",
-      Menu(S ? "Admin") / "admin" / "index" >> If(() => false, "You must be logged in")
+      Menu(S ? "Home") / "index" >> loggedIn
+      , Menu(S ? "Login") / "login"
+      , Menu(S ? "Static") / "static" / "index" >> loggedIn
+      , Menu(S ? "Unauthorized") / "static" / "notAuthorized" >> Hidden
     )
-//
-//    submenus (
-//        Menu(S ? "Management") / "about" / "management",
-//        Menu(S ? "Goals") / "about" / "goals"),
-//      Menu("directions", S ? "Directions") / "directions" >> Hidden,
-//      Menu(S ? "Admin") / "admin" / "index" >> If(() => loggedIn_?, "You must be logged in"))
-
-
-    // Build SiteMap
-//    def sitemap() = SiteMap(
-//      Menu("Home") / "index", // Simple menu form
-//      Menu("Login") / "login",
-//      Menu("Zog") / "zog",
-//      Menu("ThogZog") / "thogzog",
-//      Menu(Loc("someThing", Link(List("profile1"), true, "/static/profile2"), "more text")),
-//      profileMenu,
-//      Menu(Loc("Static", Link(List("static"), true, "/static/index"), "Static Content"))
-//    )
 
     LiftRules.setSiteMapFunc(() => sitemap())
 
