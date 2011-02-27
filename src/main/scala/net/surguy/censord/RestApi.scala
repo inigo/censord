@@ -11,7 +11,7 @@ import java.util.Date
  * @author Inigo Surguy
  * @created 26/02/2011 13:09
  */
-object Checker extends RestHelper {
+object RestApi extends RestHelper {
 
   /** Determine which requests we will respond to - this is called via the dispatch table set up in Boot. */
   serve {

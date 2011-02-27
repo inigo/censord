@@ -23,7 +23,7 @@ object WordScreen extends LiftScreen {
 
 
   def finish() {
-    // @todo Dupes code in Checker
+    // @todo Dupes code in RestApi
     for (word <- words.is.split(","); val trimmed = word.trim if trimmed.length > 0) {
       val newPhrase = Phrase.create
       newPhrase.word(trimmed).stemming( trimmed.endsWith("*") ).createdAt( new Date() )
