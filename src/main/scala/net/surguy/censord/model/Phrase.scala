@@ -22,7 +22,6 @@ class Phrase extends LongKeyedMapper[Phrase] {
 //  object createdBy extends MappedForeignKey(this)
 }
 
-object Phrase extends Phrase with LongKeyedMetaMapper[Phrase] {
-
+object Phrase extends Phrase with LongKeyedMetaMapper[Phrase] with CRUDify[Long, Phrase] {
 
 }

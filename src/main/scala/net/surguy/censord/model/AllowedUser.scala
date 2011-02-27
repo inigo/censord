@@ -26,7 +26,7 @@ class AllowedUser extends LongKeyedMapper[AllowedUser] {
 /**
  * Operations for the AllowedUser table.
  */
-object AllowedUser extends AllowedUser with LongKeyedMetaMapper[AllowedUser] with Logger {
+object AllowedUser extends AllowedUser with LongKeyedMetaMapper[AllowedUser] with Logger with CRUDify[Long, AllowedUser] {
 
   def isAllowed(username: Box[Identifier]): Boolean = {
     username match {
