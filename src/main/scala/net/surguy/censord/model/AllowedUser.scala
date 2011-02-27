@@ -29,6 +29,8 @@ class AllowedUser extends LongKeyedMapper[AllowedUser] {
  */
 object AllowedUser extends AllowedUser with LongKeyedMetaMapper[AllowedUser] with Logger with CRUDify[Long, AllowedUser] {
 
+  // Good information on using CRUD at
+  // http://neuralmonkey.blogspot.com/search/label/lift
   override def showAllMenuLoc = Full(Menu(Loc("AllowedUserList", List("alloweduser", "list"), "Users")))
 
   def isAllowed(username: Box[Identifier]): Boolean = {
