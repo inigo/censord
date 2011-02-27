@@ -12,6 +12,7 @@ import _root_.java.sql.{Connection, DriverManager}
 import _root_.net.surguy.censord.model._
 import net.surguy.censord.RestApi
 import net.liftweb.openid.{OpenIDUser, SimpleOpenIDVendor}
+import org.h2.engine.User
 
 /**
  * A class that's instantiated early and run.  It allows the application
@@ -42,11 +43,42 @@ class Boot {
     LiftRules.addToPackages("net.surguy.censord")
 //    Schemifier.schemify(true, Schemifier.infoF _, User)
 
-    // Build SiteMap
+//    val loggedIn = If( () => AllowedUser.isAllowed(SimpleOpenIDVendor.currentUser),
+//      () => if (SimpleOpenIDVendor.currentUser.isEmpty) RedirectResponse("/login") else RedirectResponse("/static/notAuthorized") )
+
+    val loggedIn = If(() => true, () => RedirectResponse("/login"))
+
+    val m : Menu = Menu(Loc("Profile", "/static/protected" :: Nil, "someProfileText", loggedIn))
+    val profileMenu = Menu(Loc("static", "/static/index" :: Nil, "/static/index", loggedIn))
+
+    //  Menu.param("Show User", "Show User", s => User.find(s), u => u.name) / "user"
+    //  Will match: /user/8
+
     def sitemap() = SiteMap(
-      Menu("Home") / "index", // Simple menu form
-      Menu("Login") / "login",
-      Menu(Loc("Static", Link(List("static"), true, "/static/index"), "Static Content")))
+      Menu(S ? "Home") / "index" >> If(() => false, RedirectResponse("/login")),
+      Menu(S ? "Login") / "login",
+      Menu(S ? "Static") / "static" / "index" >> If(() => false, RedirectResponse("/login")),
+      Menu(S ? "Zog") / "static" / "zog",
+      Menu(S ? "Admin") / "admin" / "index" >> If(() => false, "You must be logged in")
+    )
+//
+//    submenus (
+//        Menu(S ? "Management") / "about" / "management",
+//        Menu(S ? "Goals") / "about" / "goals"),
+//      Menu("directions", S ? "Directions") / "directions" >> Hidden,
+//      Menu(S ? "Admin") / "admin" / "index" >> If(() => loggedIn_?, "You must be logged in"))
+
+
+    // Build SiteMap
+//    def sitemap() = SiteMap(
+//      Menu("Home") / "index", // Simple menu form
+//      Menu("Login") / "login",
+//      Menu("Zog") / "zog",
+//      Menu("ThogZog") / "thogzog",
+//      Menu(Loc("someThing", Link(List("profile1"), true, "/static/profile2"), "more text")),
+//      profileMenu,
+//      Menu(Loc("Static", Link(List("static"), true, "/static/index"), "Static Content"))
+//    )
 
     LiftRules.setSiteMapFunc(() => sitemap())
 
