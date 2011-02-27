@@ -14,7 +14,8 @@ class Checker(phrases: List[Phrase]) {
   val stemmedTerms = phrases.filter( _.stemming.is ).map( _.word.is )
 
   def checkText(text: String): Boolean = {
-    simpleTerms.find( text.contains(_) ).isEmpty
+    // @todo Should be doing proper stemming
+    simpleTerms.find( text.contains(_) ).isEmpty && stemmedTerms.find( text.contains(_) ).isEmpty
   }
 
 }
