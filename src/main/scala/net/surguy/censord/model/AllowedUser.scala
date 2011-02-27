@@ -6,7 +6,8 @@ import java.util.Date
 import net.liftweb.common.{Logger, Full, Box}
 
 /**
- * @todo Add some documentation!
+ * A user of the system. The "allowed" flag determines whether the user is able to use the system,
+ * but every user who logs in via OpenID will be entered into the table.
  *
  * @author Inigo Surguy
  * @created 27/02/2011 08:01
@@ -22,6 +23,9 @@ class AllowedUser extends LongKeyedMapper[AllowedUser] {
   object createdAt extends MappedDateTime(this)
 }
 
+/**
+ * Operations for the AllowedUser table.
+ */
 object AllowedUser extends AllowedUser with LongKeyedMetaMapper[AllowedUser] with Logger {
 
   def isAllowed(username: Box[Identifier]): Boolean = username match {
