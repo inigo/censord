@@ -3,7 +3,8 @@ package net.surguy.censord.model
 import net.liftweb.mapper._
 import org.openid4java.discovery.Identifier
 import java.util.Date
-import net.liftweb.common.{Logger, Full, Box}
+import net.liftweb.common.{Empty, Logger, Full, Box}
+import net.liftweb.sitemap.{Menu, Loc}
 
 /**
  * A user of the system. The "allowed" flag determines whether the user is able to use the system,
@@ -27,6 +28,8 @@ class AllowedUser extends LongKeyedMapper[AllowedUser] {
  * Operations for the AllowedUser table.
  */
 object AllowedUser extends AllowedUser with LongKeyedMetaMapper[AllowedUser] with Logger with CRUDify[Long, AllowedUser] {
+
+  override def showAllMenuLoc = Full(Menu(Loc("AllowedUserList", List("alloweduser", "list"), "Users")))
 
   def isAllowed(username: Box[Identifier]): Boolean = {
     username match {
