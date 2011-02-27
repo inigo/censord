@@ -17,10 +17,13 @@ or with continuous deployment via SBT and JRebel:
 Licensing
 ---------
 
-The Censord application is licensed under the terms of the GNU Affero General
-Public License, Version 3, available at http://www.gnu.org/licenses/agpl-3.0-standalone.html.
-
 This application uses the JQuery OpenID plugin by Jarrett Vance, available at
 http://jvance.com/pages/JQueryOpenIDPlugin.xhtml, under the terms of the
 Creative Commons Attribution license.
+
+The Censord application is licensed under the terms of the GNU Affero General
+Public License, Version 3, available at http://www.gnu.org/licenses/agpl-3.0-standalone.html, with the
+additional restriction that it requires attribution made in the documentation to Jarrett Vance, author
+of the JQuery OpenID plugin.
+
 
