@@ -6,13 +6,16 @@ import net.liftweb.util.BindHelpers._
 import net.liftweb.util.{TimeHelpers, CssBind}
 
 import _root_.net.liftweb.http.SHtml._
-import net.liftweb.http.js.JsCmds.SetHtml
 import net.liftweb.common.Logger
 import java.util.Date
 import xml.{Group, Text}
 import net.liftweb.http.js.jquery.JqJE.Jq
 import net.liftweb.http.js.JE.ParentOf
 import net.liftweb.http.js.jquery.JqJsCmds.FadeOut
+import net.liftweb.http.js.JE
+import net.liftweb.http.js.JsCmds
+import net.liftweb.http.js.JsCmd
+import net.liftweb.http.js.JsCmds.{Run, SetHtml}
 
 /**
  * @todo Add some documentation!
@@ -38,8 +41,8 @@ class ListAllowedUser extends Logger {
           }
        & ".allowed [class+]" #> { if (w.allowed.is) "good" else "bad" }
        & ".delete *" #> ajaxButton("Delete", {() =>
-//          w.delete_!
-          SetHtml( "line_"+w.id.is, Text(""))
+          w.delete_!
+          Run("window.location.reload()") // Runs arbitrary JavaScript
         })
   )
 

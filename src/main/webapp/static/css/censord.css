@@ -28,6 +28,10 @@ h1 {
    margin-bottom: 1em;
 }
 
+#title .username {
+    float: right;
+}
+
 /* Menu */
 
 #menu {

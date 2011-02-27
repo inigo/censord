@@ -1,22 +1,22 @@
 package net.surguy.censord.snippet
 
 import xml.NodeSeq
-import net.liftweb.openid.SimpleOpenIDVendor
 import net.liftweb.common.{Empty, Full}
+import net.surguy.censord.LocalOpenIDVendor
 
 /**
- * @todo Add some documentation!
+ * Displays the currently logged-in user.
  *
  * @author Inigo Surguy
  * @created 26/02/2011 20:39
  */
 class OpenID {
-  def renderForm(xhtml: NodeSeq) : NodeSeq = SimpleOpenIDVendor.loginForm
+  def renderForm(xhtml: NodeSeq) : NodeSeq = LocalOpenIDVendor.loginForm
 
-  // @todo Retrieve email address http://scala-tools.org/mvnsites/liftweb-2.0/framework/scaladocs/net/liftweb/openid/Extensions.scala.html
-  def user(xhtml: NodeSeq) : NodeSeq = SimpleOpenIDVendor.currentUser match {
-    case Full(username) => <span class="username">{ username }</span>
-    case Empty => <span class="username">Not logged in</span>
-    case _ => <span class="username">Error getting username</span>
+  def user(xhtml: NodeSeq) : NodeSeq = LocalOpenIDVendor.currentUser match {
+    case Full(username) => <span class="username"><img src="/images/openidico.png" width="25" height="25"
+                                                       alt={ "Logged in as : "+username } title={ "Logged in as : "+username }/></span>
+    case Empty => <span class="username"></span>
+    case _ => <span class="username"></span>
   }
 }

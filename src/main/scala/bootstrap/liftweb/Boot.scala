@@ -10,9 +10,9 @@ import Helpers._
 import _root_.net.liftweb.mapper.{DB, ConnectionManager, Schemifier, DefaultConnectionIdentifier, StandardDBVendor}
 import _root_.java.sql.{Connection, DriverManager}
 import _root_.net.surguy.censord.model._
-import net.surguy.censord.RestApi
-import net.liftweb.openid.{OpenIDUser, SimpleOpenIDVendor}
+import net.liftweb.openid.OpenIDUser
 import org.h2.engine.User
+import net.surguy.censord.{LocalOpenIDVendor, RestApi}
 
 /**
  * A class that's instantiated early and run.  It allows the application
@@ -42,8 +42,8 @@ class Boot {
     // where to search for snippets
     LiftRules.addToPackages("net.surguy.censord")
 
-    val loggedIn = If( () => AllowedUser.isAllowed(SimpleOpenIDVendor.currentUser),
-      () => if (SimpleOpenIDVendor.currentUser.isEmpty) RedirectResponse("/login") else RedirectResponse("/static/notAuthorized") )
+    val loggedIn = If( () => AllowedUser.isAllowed(LocalOpenIDVendor.currentUser),
+      () => if (LocalOpenIDVendor.currentUser.isEmpty) RedirectResponse("/login") else RedirectResponse("/static/notAuthorized") )
 
     //  Menu.param("Show User", "Show User", s => User.find(s), u => u.name) / "user"
     //  Will match: /user/8
@@ -68,7 +68,7 @@ class Boot {
     LiftRules.setSiteMapFunc(() => sitemap())
 
     // Allow OpenID login
-    LiftRules.dispatch.append(SimpleOpenIDVendor.dispatchPF)
+    LiftRules.dispatch.append(LocalOpenIDVendor.dispatchPF)
 
     /* Show the spinny image when an Ajax call starts */
     LiftRules.ajaxStart = Full(() => LiftRules.jsArtifacts.show("ajax-loader").cmd)
@@ -78,7 +78,7 @@ class Boot {
 
     LiftRules.early.append(makeUtf8)
 
-    LiftRules.loggedInTest = Full(() => SimpleOpenIDVendor.currentUser.isDefined )
+    LiftRules.loggedInTest = Full(() => LocalOpenIDVendor.currentUser.isDefined )
 
     S.addAround(DB.buildLoanWrapper)
 

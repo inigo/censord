@@ -18,7 +18,7 @@ class AllowedUser extends LongKeyedMapper[AllowedUser] {
 
   def primaryKeyField = id
   object id extends MappedLongIndex(this)
-  object username extends MappedString(this, 50)
+  object username extends MappedString(this, 255)
   object allowed extends MappedBoolean(this)
 
   object createdAt extends MappedDateTime(this)
@@ -47,6 +47,12 @@ object AllowedUser extends AllowedUser with LongKeyedMetaMapper[AllowedUser] wit
       val defaultUser = AllowedUser.create
       defaultUser.username(defaultUsername).allowed(true).createdAt(new Date())
       defaultUser.save()
+    }
+  }
+
+  def createIfNew(username: String) = {
+    find(By(AllowedUser.username, username)).openOr{
+      AllowedUser.create.username(username).allowed(false).createdAt(new Date()).save()
     }
   }
 
