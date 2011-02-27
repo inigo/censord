@@ -13,3 +13,11 @@ or with continuous deployment via SBT and JRebel:
     java -noverify -javaagent:[insert jrebel dir]/jrebel.jar -Xmx768M -Drebel.lift_plugin=true -jar [insert sbt dir]/sbt-launch.jar 
     jetty-run
     ~ prepare-webapp
+
+Licensing
+---------
+
+This application uses the JQuery OpenID plugin by Jarrett Vance, available at
+http://jvance.com/pages/JQueryOpenIDPlugin.xhtml, under the terms of the
+Creative Commons Attribution license.
+
