@@ -65,8 +65,17 @@ class Boot {
 
     S.addAround(DB.buildLoanWrapper)
 
+    // Fade out lift notices after 2 seconds - don't fade out warnings or errors
+    // http://www.assembla.com/wiki/show/liftweb/Lift_Notices_and_Auto_Fadeout
+//    LiftRules.noticesAutoFadeOut.default.set( (notices: NoticeType.Value) => notices match {
+//      case NoticeType.Notice => Full((2 seconds, 2 seconds))
+//      case _ => Empty
+//    })
+
     // Create database tables
     Schemifier.schemify(true, Schemifier.infoF _, Phrase)
+    Schemifier.schemify(true, Schemifier.infoF _, AllowedUser)
+    AllowedUser.ensureDefaultUser()
   }
 
   /**
