@@ -123,3 +123,13 @@ h1 {
   width: 25em;
 }
 
+#checkText textarea {
+  width: 40em;
+  height: 10em;
+}
+
+#checkText button {
+  clear: both;
+  display: block;
+  margin-top: 0.5em;
+}
