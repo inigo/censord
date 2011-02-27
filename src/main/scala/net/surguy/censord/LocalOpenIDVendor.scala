@@ -24,9 +24,6 @@ object LocalOpenIDVendor extends SimpleOpenIDVendor {
     id match {
       case Full(id) => AllowedUser.createIfNew(id.getIdentifier)
     }
-//    S.redirectTo("/")
-//    super.postLogin(id, res)
     OpenIDUser(id)
-
   }
 }
