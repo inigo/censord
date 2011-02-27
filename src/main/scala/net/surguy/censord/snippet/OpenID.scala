@@ -13,10 +13,10 @@ import net.liftweb.common.{Empty, Full}
 class OpenID {
   def renderForm(xhtml: NodeSeq) : NodeSeq = SimpleOpenIDVendor.loginForm
 
-  // @todo Make pretty http://wstrange.wordpress.com/2009/11/23/adding-openid-support-to-a-scala-lift-application/
   // @todo Retrieve email address http://scala-tools.org/mvnsites/liftweb-2.0/framework/scaladocs/net/liftweb/openid/Extensions.scala.html
   def user(xhtml: NodeSeq) : NodeSeq = SimpleOpenIDVendor.currentUser match {
     case Full(username) => <span class="username">{ username }</span>
     case Empty => <span class="username">Not logged in</span>
+    case _ => <span class="username">Error getting username</span>
   }
 }
