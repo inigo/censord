@@ -1,13 +1,7 @@
 package net.surguy.censord.model
 
 import org.specs.SpecificationWithJUnit
-import org.specs.specification.Examples
-import net.liftweb.common.Empty
-import net.liftweb.http.{LiftSession, S}
-import net.liftweb.util.StringHelpers._
-import bootstrap.liftweb.Boot
-import net.liftweb.util.Props
-import net.liftweb.mapper.{DefaultConnectionIdentifier, StandardDBVendor, DB}
+import net.surguy.censord.DatabaseSetup
 
 /**
  * Test managing allowed users.
@@ -16,26 +10,7 @@ import net.liftweb.mapper.{DefaultConnectionIdentifier, StandardDBVendor, DB}
  * @created 27/02/2011 09:23
  */
 
-class AllowedUserTest extends SpecificationWithJUnit {
-  val session = new LiftSession("", randomString(20), Empty)
-
-  doBeforeSpec {
-    setupDatabase()
-  }
-
-  def setupSession() = {
-    S.initIfUninitted(session) { }
-  }
-
-  def setupDatabase() = {
-    println("Setting up database")
-    val vendor = new StandardDBVendor(Props.get("db.driver") openOr "org.h2.Driver",
-       Props.get("db.url") openOr
-       "jdbc:h2:lift_proto_test.db;AUTO_SERVER=TRUE",
-       Props.get("db.user"), Props.get("db.password"))
-    DB.defineConnectionManager(DefaultConnectionIdentifier, vendor)
-    new Boot().createDatabaseTables()
-  }
+class AllowedUserTest extends SpecificationWithJUnit with DatabaseSetup {
 
   "ensuring there is a default user" should {
     "create a user if there isn't already one" in {
