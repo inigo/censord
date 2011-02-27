@@ -40,19 +40,12 @@ object AllowedUser extends AllowedUser with LongKeyedMetaMapper[AllowedUser] wit
     }
   }
 
-  def ensureDefaultUser() = {
-    if (findAll.isEmpty) {
-      val defaultUsername = "http://surguy.net/"
-      info("Currently no users exist - creating " + defaultUsername)
-      val defaultUser = AllowedUser.create
-      defaultUser.username(defaultUsername).allowed(true).createdAt(new Date())
-      defaultUser.save()
-    }
-  }
-
-  def createIfNew(username: String) = {
+  def createIfNew(username: String): AllowedUser = {
     find(By(AllowedUser.username, username)).openOr{
-      AllowedUser.create.username(username).allowed(false).createdAt(new Date()).save()
+      val isFirstUser = AllowedUser.count==0
+      val newUser = AllowedUser.create.username(username).allowed(isFirstUser).createdAt(new Date())
+      newUser.save()
+      newUser
     }
   }
 

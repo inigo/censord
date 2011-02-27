@@ -88,7 +88,6 @@ class Boot {
 //    })
 
     createDatabaseTables()
-    AllowedUser.ensureDefaultUser()
   }
 
   def createDatabaseTables() = {

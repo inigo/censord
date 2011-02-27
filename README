@@ -14,6 +14,14 @@ or with continuous deployment via SBT and JRebel:
     jetty-run
     ~ prepare-webapp
 
+Login
+-----
+
+Login is with OpenID - but since Google, Yahoo and others support OpenID, this shouldn't be too much of a barrier.
+
+Once censord is running, then the first user who logs in will be tagged as allowed to administer the system. Subsequent
+users need to be approved by an administrator.
+
 Licensing
 ---------
 

@@ -12,18 +12,17 @@ import net.surguy.censord.DatabaseSetup
 
 class AllowedUserTest extends SpecificationWithJUnit with DatabaseSetup {
 
-  "ensuring there is a default user" should {
-    "create a user if there isn't already one" in {
+  "creating users" should {
+    "set allowed to be true for the first user" in {
       deleteAll()
-      AllowedUser.ensureDefaultUser()
+      AllowedUser.createIfNew("test").allowed.is must beTrue
       AllowedUser.findAll.size must beEqualTo(1)
+      AllowedUser.createIfNew("test2").allowed.is must beFalse
     }
-    "do nothing when there already are users" in {
+    "set allowed to be false for subsequent users" in {
       deleteAll()
-      AllowedUser.create.username("test").save()
-      AllowedUser.findAll.size must beEqualTo(1)
-      AllowedUser.ensureDefaultUser()
-      AllowedUser.findAll.size must beEqualTo(1)
+      AllowedUser.createIfNew("test")
+      AllowedUser.createIfNew("test2").allowed.is must beFalse
     }
   }
 
