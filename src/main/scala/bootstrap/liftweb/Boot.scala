@@ -11,7 +11,6 @@ import _root_.net.liftweb.mapper.{DB, ConnectionManager, Schemifier, DefaultConn
 import _root_.java.sql.{Connection, DriverManager}
 import _root_.net.surguy.censord.model._
 import net.liftweb.openid.OpenIDUser
-import org.h2.engine.User
 import net.surguy.censord.{LocalOpenIDVendor, RestApi}
 
 /**
