@@ -72,10 +72,13 @@ class Boot {
 //      case _ => Empty
 //    })
 
-    // Create database tables
+    createDatabaseTables()
+    AllowedUser.ensureDefaultUser()
+  }
+
+  def createDatabaseTables() = {
     Schemifier.schemify(true, Schemifier.infoF _, Phrase)
     Schemifier.schemify(true, Schemifier.infoF _, AllowedUser)
-    AllowedUser.ensureDefaultUser()
   }
 
   /**
