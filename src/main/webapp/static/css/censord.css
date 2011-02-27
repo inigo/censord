@@ -32,6 +32,15 @@ h1 {
     float: right;
 }
 
+#title .username img {
+  vertical-align: middle;
+}
+
+#title .logout {
+  font-size: 0.8em;
+  padding-right: 0.4em;
+}
+
 /* Menu */
 #menu {
   background: #fee;
@@ -90,4 +99,8 @@ h1 {
 
 #list .good {
   color: green;
+}
+
+#list button {
+  margin-left: 0.4em;
 }

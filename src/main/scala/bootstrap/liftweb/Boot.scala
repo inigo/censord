@@ -52,7 +52,7 @@ class Boot {
 
     // Format documented on the Wiki at http://www.assembla.com/wiki/show/liftweb/SiteMap
     def sitemap() = SiteMap(
-      Menu(S ? "Home") / "index" >> loggedIn
+      Menu(S ? "Check") / "index" >> loggedIn
       , Menu(S ? "Login") / "login" >> notLoggedIn
 //      , Menu(S ? "Static") / "static" / "index" >> loggedIn
       , Menu(S ? "Users") / "alloweduser/list" >> loggedIn
