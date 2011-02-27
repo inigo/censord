@@ -45,19 +45,18 @@ class Boot {
     val loggedIn = If( () => AllowedUser.isAllowed(LocalOpenIDVendor.currentUser),
       () => if (LocalOpenIDVendor.currentUser.isEmpty) RedirectResponse("/login") else RedirectResponse("/static/notAuthorized") )
 
+    val notLoggedIn = If( () => LocalOpenIDVendor.currentUser.isEmpty, RedirectResponse("/") )
+
     //  Menu.param("Show User", "Show User", s => User.find(s), u => u.name) / "user"
     //  Will match: /user/8
 
     // Format documented on the Wiki at http://www.assembla.com/wiki/show/liftweb/SiteMap
     def sitemap() = SiteMap(
       Menu(S ? "Home") / "index" >> loggedIn
-      , Menu(S ? "Login") / "login"
-      , Menu(S ? "Static") / "static" / "index" >> loggedIn
+      , Menu(S ? "Login") / "login" >> notLoggedIn
+//      , Menu(S ? "Static") / "static" / "index" >> loggedIn
       , Menu(S ? "Users") / "alloweduser/list" >> loggedIn
       , Menu(S ? "Terms") / "phrase/list" >> loggedIn
-
-      // , Menu(Loc("AllowedUserList", List("alloweduser", "list"), "Users"))
-
       // These entries need to be in the SiteMap, or they cannot be accessed - but should not be directly visible
       , Menu(S ? "Hidden") / "hidden" >> Hidden submenus {
         List(AllowedUser.menus, Phrase.menus).flatten

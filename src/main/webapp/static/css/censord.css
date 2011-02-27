@@ -33,36 +33,42 @@ h1 {
 }
 
 /* Menu */
-
 #menu {
-   background: #fee;
-   padding: 0.2em 0.2em 0em 0.2em ;
+  background: #fee;
+  padding: 0.2em 0.2em 0em 0.2em ;
+
 }
 
 #menu li {
-  display: inline-block;
+ display: inline-block;
+}
+
+#menu span {
+  background: #fdd;
 }
 
 #menu a {
-   display: inline-block;
-   margin: 0.2em 1.8em 0em 0.2em;
-   padding: 0.2em 1em 0.2em 1em;
-   background: #edd;
-   box-shadow: 2px -1px 1px 0px #999;
-   border-radius: 5px 5px 0px 0px;
-   text-decoration: none;
-   color: black;
-   cursor: hand;
+  background: #edd;
+  cursor: pointer;
+}
+
+#menu a, #menu span {
+  display: inline-block;
+  margin: 0.2em 1.8em 0em 0.2em;
+  padding: 0.2em 1em 0.2em 1em;
+  box-shadow: 2px -1px 1px 0px #999;
+  border-radius: 5px 5px 0px 0px;
+  text-decoration: none;
+  color: black;
 }
 
 #menu a:hover {
-   background: #fdd;
+  background: #fdd;
 }
 
 #menu a:active {
-   box-shadow: inset 1px 1px 1px 1px #999;
+  box-shadow: inset 1px 1px 1px 1px #999;
 }
-
 
 /* Content */
 
