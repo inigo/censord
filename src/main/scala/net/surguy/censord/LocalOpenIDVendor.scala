@@ -23,6 +23,7 @@ object LocalOpenIDVendor extends SimpleOpenIDVendor {
   override def postLogin(id: Box[Identifier], res: VerificationResult) = {
     id match {
       case Full(id) => AllowedUser.createIfNew(id.getIdentifier)
+      case _ =>
     }
     OpenIDUser(id)
   }
