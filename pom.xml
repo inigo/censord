@@ -28,6 +28,13 @@
 
     <dependencies>
 
+        <!-- Snowball - used for stemming -->
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-snowball</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+
         <!-- Database -->
         <dependency>
             <groupId>com.h2database</groupId>
