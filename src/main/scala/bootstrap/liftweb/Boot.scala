@@ -59,7 +59,9 @@ class Boot {
       , Menu(S ? "Users") / "alloweduser/list" >> loggedIn
       // These entries need to be in the SiteMap, or they cannot be accessed - but should not be directly visible
       , Menu(S ? "Hidden") / "hidden" >> Hidden submenus {
-        List(AllowedUser.menus, Phrase.menus).flatten
+          Menu(S ? "HiddenLoggedInOnly") / "log" >> loggedIn submenus {
+            List(AllowedUser.menus, Phrase.menus).flatten
+          }
       }
       , Menu(S ? "Unauthorized") / "static" / "notAuthorized" >> unauthorized
     )
