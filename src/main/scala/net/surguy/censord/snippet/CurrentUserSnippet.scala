@@ -14,7 +14,6 @@ class CurrentUserSnippet {
   def renderForm(xhtml: NodeSeq) : NodeSeq = LocalOpenIDVendor.loginForm
 
   def user(xhtml: NodeSeq) : NodeSeq = LocalOpenIDVendor.currentUser match {
-    // @todo Move this into something togglable in the frontend
     case Full(username) => <span class="username">
                             <img src="/images/openidico.png" width="25" height="25"
                                                        alt={ "Logged in as : "+username } title={ "Logged in as : "+username }/>
