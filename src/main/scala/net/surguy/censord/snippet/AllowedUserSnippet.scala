@@ -16,6 +16,7 @@ import net.liftweb.http.js.JE
 import net.liftweb.http.js.JsCmds
 import net.liftweb.http.js.JsCmd
 import net.liftweb.http.js.JsCmds.{Run, SetHtml}
+import net.surguy.censord.LocalOpenIDVendor
 
 /**
  * Display the current list of users, toggle whether they're allowed to use the system or not,
@@ -28,25 +29,31 @@ import net.liftweb.http.js.JsCmds.{Run, SetHtml}
  */
 class AllowedUserSnippet extends Logger {
 
-  // @todo Don't allow users to delete or disallow themselves
   def list(): CssBind = ".line *" #> AllowedUser.findAll.map(
     w => ".username *" #> w.username
        & ".createdAt *" #> TimeHelpers.dateFormatter.format(w.createdAt.is)
-       & ".allowed *" #> {
-          val id = "itemAllowed"+w.primaryKeyField.is
-          def txt() = if (w.allowed.is) Text("Yes") else Text("No")
-          List(
-            <span id={ id }>{ txt }</span>,
-            ajaxButton("Toggle", {() =>
-              w.allowed( !w.allowed.is ).save()
-              SetHtml(id, txt() )
-            }))
+       & ".allowed *" #> { LocalOpenIDVendor.currentUser.get match {
+          case u if u.toString == w.username.is.toString => Text("")
+          case _ =>
+            val id = "itemAllowed"+w.primaryKeyField.is
+            def txt() = if (w.allowed.is) Text("Yes") else Text("No")
+            List(
+              <span id={ id }>{ txt }</span>,
+              ajaxButton("Toggle", {() =>
+                w.allowed( !w.allowed.is ).save()
+                SetHtml(id, txt() )
+              }))
+            }
           }
        & ".allowed [class+]" #> { if (w.allowed.is) "good" else "bad" }
-       & ".delete *" #> ajaxButton("Delete", {() =>
-          w.delete_!
-          Run("window.location.reload()") // Runs arbitrary JavaScript
-        })
+       & ".delete *" #> { LocalOpenIDVendor.currentUser.get match {
+          case u if u.toString == w.username.is.toString => Text("")
+          case _ =>
+            ajaxButton("Delete", {() =>
+            w.delete_!
+            Run("window.location.reload()") // Runs arbitrary JavaScript
+          })
+        } }
   )
 
 }
