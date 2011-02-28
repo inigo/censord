@@ -25,8 +25,12 @@ object RestApi extends RestHelper {
   def checkText(text: String) = {
     val result = new Checker(Phrase.findAll).checkText(text)
     result match {
-      case true => <span class="check success">Success</span>
-      case false => <span class="check failure">Failure</span>
+      case Accepted() => <span class="check success"><span class="msg">Success</span></span>
+      case Rejected(reasons) =>
+        <span class="check failure">
+          <span class="msg">Failure</span>
+          <span class="reasons">{ reasons.mkString(" ") }</span>
+        </span>
     }
   }
 

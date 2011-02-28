@@ -14,10 +14,14 @@ class Checker(phrases: List[Phrase]) {
   val simpleTerms = phrases.filter( ! _.stemming.is ).map( _.word.is ).map( _.toLowerCase )
   val stemmedTerms = phrases.filter( _.stemming.is ).map( _.word.is ).map( _.toLowerCase ).map( WordUtils.stem )
 
-  // @todo Report why a rejection occurred
-  def checkText(text: String): Boolean = {
+  def checkText(text: String): ValidationResult = {
     val words = text.toLowerCase.words.toList
-    words.intersect( simpleTerms ).isEmpty && words.map( WordUtils.stem ).intersect( stemmedTerms ).isEmpty
+    val failedWords = words.intersect( simpleTerms ) ::: words.map( WordUtils.stem ).intersect( stemmedTerms )
+    if (failedWords.isEmpty) Accepted() else Rejected(failedWords)
   }
 
 }
+
+sealed abstract class ValidationResult(val isAccepted: Boolean)
+case class Accepted() extends ValidationResult(true)
+case class Rejected(words: List[String]) extends ValidationResult(false)
