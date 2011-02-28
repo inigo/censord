@@ -45,6 +45,8 @@ class Boot {
       () => if (LocalOpenIDVendor.currentUser.isEmpty) RedirectResponse("/login") else RedirectResponse("/static/notAuthorized") )
 
     val notLoggedIn = If( () => LocalOpenIDVendor.currentUser.isEmpty, RedirectResponse("/") )
+    val unauthorized = If( () => LocalOpenIDVendor.currentUser.isDefined && ! AllowedUser.isAllowed(LocalOpenIDVendor.currentUser)
+      , RedirectResponse("/") )
 
     //  Menu.param("Show User", "Show User", s => User.find(s), u => u.name) / "user"
     //  Will match: /user/8
@@ -59,7 +61,7 @@ class Boot {
       , Menu(S ? "Hidden") / "hidden" >> Hidden submenus {
         List(AllowedUser.menus, Phrase.menus).flatten
       }
-      , Menu(S ? "Unauthorized") / "static" / "notAuthorized" >> Hidden
+      , Menu(S ? "Unauthorized") / "static" / "notAuthorized" >> unauthorized
     )
 
     LiftRules.setSiteMapFunc(() => sitemap())
