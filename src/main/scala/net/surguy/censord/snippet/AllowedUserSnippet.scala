@@ -31,6 +31,8 @@ class AllowedUserSnippet extends Logger {
 
   def list(): CssBind = ".line *" #> AllowedUser.findAll.map(
     w => ".username *" #> w.username
+       & ".realName *" #> w.realName
+       & ".email *" #> w.email
        & ".createdAt *" #> TimeHelpers.dateFormatter.format(w.createdAt.is)
        & ".allowed *" #> { LocalOpenIDVendor.currentUser.get match {
           case u if u.toString == w.username.is.toString => Text("")

@@ -20,6 +20,8 @@ class AllowedUser extends LongKeyedMapper[AllowedUser] {
   object id extends MappedLongIndex(this)
   object username extends MappedString(this, 255)
   object allowed extends MappedBoolean(this)
+  object email extends MappedEmail(this, 255)
+  object realName extends MappedPoliteString(this, 255)
 
   object createdAt extends MappedDateTime(this)
 }
