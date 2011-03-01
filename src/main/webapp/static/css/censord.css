@@ -105,7 +105,59 @@ h1 {
   margin-left: 0.4em;
 }
 
-/* Specific forms */
+#list tr:nth-child(even) {
+ background: #f9f9f9;
+}
+
+#list thead th {
+ padding: 5px 2px 5px 5px;
+}
+
+/* Buttons */
+
+#list button {
+    background: -moz-linear-gradient(center top , #EEEEEE 0%, #CCCCCC 100%) repeat scroll 0 0 transparent;
+    border-color: #CCCCCC #CCCCCC #BBBBBB;
+    border-radius: 6px;
+    border-style: solid;
+    border-width: 1px;
+    color: #333333;
+    font-weight: normal;
+    line-height: 1;
+    padding: 2px 0;
+    text-align: center;
+    text-shadow: 0 1px 0 #EEEEEE;
+    min-width: 60px;
+    position: relative;
+    top: -2px;
+}
+#list button:hover {
+    background: -moz-linear-gradient(center top , #DDDDDD 0%, #BBBBBB 100%) repeat scroll 0 0 transparent;
+    border-color: #BBBBBB #BBBBBB #999999;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    text-shadow: 0 1px 0 #DDDDDD;
+}
+#list button:active {
+    border-color: #AAAAAA #AAAAAA #888888;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 0 5px 2px #AAAAAA inset, 0 1px 0 0 #EEEEEE;
+}
+
+#list .delete button:hover  {
+    background: #D84743;
+    background-position: 0 -121px;
+    border-color: #911D1B;
+    color: #FFFFFF;
+    box-shadow: 0 1px 0 0 #FF9999 inset;
+    text-shadow: 0 1px 1px black;
+}
+
+/* Specific pages */
+
+/* The terms page */
 
 #createNewWords {
   border-top: solid 1px #aaa;
@@ -123,6 +175,17 @@ h1 {
   width: 25em;
 }
 
+#list .phraselist .stemming span {
+  min-width: 2em;
+  display: inline-block;
+}
+
+#list .phraselist td {
+  padding-top: 6px;
+}
+
+/* The check page */
+
 #checkText textarea {
   width: 40em;
   height: 10em;
@@ -133,3 +196,23 @@ h1 {
   display: block;
   margin-top: 0.5em;
 }
+
+/* The users page */
+
+#list .userlist .allowed span {
+   display: inline-block;
+   width: 4em;
+}
+
+#list .userlist td:nth-child(1), #list .userlist th:nth-child(1) {
+  min-width: 60px;
+}
+
+#list .userlist .icon img {
+ vertical-align: middle;
+ border: solid 1px black;
+ box-shadow: 2px -1px 1px 0px #999;
+ border-radius: 5px 5px 5px 5px;
+ margin: 5px 0px;
+}
+

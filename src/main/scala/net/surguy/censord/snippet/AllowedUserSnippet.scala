@@ -42,10 +42,10 @@ class AllowedUserSnippet extends Logger {
           case u if u.toString == w.username.is.toString => Text("")
           case _ =>
             val id = "itemAllowed"+w.primaryKeyField.is
-            def txt() = if (w.allowed.is) Text("Yes") else Text("No")
+            def txt() = if (w.allowed.is) Text("Allowed") else Text("Banned")
             List(
               <span id={ id }>{ txt }</span>,
-              ajaxButton("Toggle", {() =>
+              ajaxButton(if (w.allowed.is) "Toggle" else "Toggle", {() =>
                 w.allowed( !w.allowed.is ).save()
                 SetHtml(id, txt() )
               }))
