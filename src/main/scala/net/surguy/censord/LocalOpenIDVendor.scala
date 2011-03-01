@@ -18,10 +18,6 @@ import net.liftweb.common.{Logger, Empty, Full, Box}
 
 object LocalOpenIDVendor extends SimpleOpenIDVendor with Logger {
 
-  // https://www.assembla.com/wiki/show/liftweb/OpenID
-  // http://scala-tools.org/mvnsites/liftweb-2.0/framework/scaladocs/net/liftweb/openid/Extensions.scala.html
-//  http://scala-programming-language.1934581.n4.nabble.com/Lift-OpenID-should-default-to-openid-identifier-for-post-param-name-td1981520.html
-//  https://www.assembla.com/spaces/liftweb/tickets/329-Make-OpenID-support-more-extensible
   override def createAConsumer = new AnyRef with OpenIDConsumer[UserType] {
 
     def addParams(di : DiscoveryInformation, authReq: AuthRequest): Unit = {
@@ -39,7 +35,6 @@ object LocalOpenIDVendor extends SimpleOpenIDVendor with Logger {
       case Full(id) =>
         val user = AllowedUser.createIfNew(id.getIdentifier)
 
-        // See OpenIDProtoUser:67
         import WellKnownAttributes._
         val attrs = WellKnownAttributes.attributeValues(res.getAuthResponse)
         attrs.get(Email) map {e => user.email(trace("Extracted email",e))}
