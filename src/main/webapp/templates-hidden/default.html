@@ -6,14 +6,9 @@
     <link rel="stylesheet" href="/static/css/censord.css"/>
     <script id="jquery" src="/classpath/jquery.js" type="text/javascript"></script>
     <script type="text/javascript">
-
-        function confirmBeforeDelete() {
-            var newFn = function(event) { if (!confirm("Are you sure?")) { event.stopImmediatePropagation(); } };
-            addBeforeClick(newFn);
-        }
-
-        function addBeforeClick(newFn) {
-            $(".delete button").each(function(event) {
+        (function($) {
+          $.fn.beforeClick = function(newFn) {
+            return this.each(function() {
                 var originalJS = $(this).attr("onclick");
                 $(this).removeAttr("onclick");
                 // Necessary because otherwise eval fails - cannot return except in a function
@@ -21,10 +16,13 @@
                 $(this).click(function(event) { newFn(event); });
                 $(this).click(function() { eval(editedOriginalJs); return false; });
             });
-        };
+          };
+        })( jQuery );
 
         $(document).ready(function() {
-            confirmBeforeDelete();
+            $(".delete button").beforeClick(
+                function(event) { if (!confirm("Are you sure?")) { event.stopImmediatePropagation(); } }
+            );
         });
 
     </script>
