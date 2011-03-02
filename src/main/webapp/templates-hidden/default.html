@@ -5,14 +5,40 @@
     <link rel="stylesheet" href="/static/css/reset.css"/>
     <link rel="stylesheet" href="/static/css/censord.css"/>
     <script id="jquery" src="/classpath/jquery.js" type="text/javascript"></script>
-    <!-- @todo Have a confirmation dialog on all .delete buttons -->
+    <script type="text/javascript">
+
+        function confirmBeforeDelete() {
+            var newFn = function(event) { if (!confirm("Are you sure?")) { event.stopImmediatePropagation(); } };
+            addBeforeClick(newFn);
+        }
+
+        function addBeforeClick(newFn) {
+            $(".delete button").each(function(event) {
+                var originalJS = $(this).attr("onclick");
+                $(this).removeAttr("onclick");
+                // Necessary because otherwise eval fails - cannot return except in a function
+                var editedOriginalJs = originalJS.substring(0,originalJS.lastIndexOf("return"));
+                $(this).click(function(event) { newFn(event); });
+                $(this).click(function() { eval(editedOriginalJs); return false; });
+            });
+        };
+
+        $(document).ready(function() {
+            confirmBeforeDelete();
+        });
+
+    </script>
 </head>
 <body>
 <div id="container">
+
+
     <div id="title">
-        <h1 class="alt"><img src="/images/censord.png" alt="censord" title="censord"/><img alt="" id="ajax-loader" src="/images/ajax-loader.gif"/></h1>
+        <h1 class="alt"><img src="/images/censord.png" alt="censord" title="censord"/></h1>
         <span class="lift:currentUserSnippet.user"></span>
     </div>
+
+    <div style="float:right"><img alt="" id="ajax-loader" src="/images/ajax-loader.gif"/></div>
 
     <div id="menu">
         <span class="lift:Menu.builder"></span>
