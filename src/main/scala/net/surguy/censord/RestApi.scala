@@ -18,7 +18,7 @@ object RestApi extends RestHelper {
     // @todo Provide statistics on API usage
     case "api" :: "check" :: _ Get _ => for {text <- S.param("text") ?~ "Param 'text' is missing"} yield checkText(text)
     // @todo Provide API keys
-    // @todo Allow trusted users with an API key to upload words via REST
+    // @todo Allow trusted users with an API key to download all current words via REST
 //    case "api" :: "add" :: _ Post _ => for {text <- S.param("phrase") ?~ "Param 'phrase' is missing"} yield addPhrase(text)
   }
 
