@@ -37,6 +37,9 @@ class AllowedUserSnippet extends Logger {
          ".icon *" #> <img src={ gravatarUrl(w.email.is) } alt={ w.username } title={ w.username } width={iconSize} height={iconSize} />
        & ".realName *" #> w.realName
        & ".email *" #> w.email
+       & ".apiKey *" #> Group(
+             <img src="/images/apiKey.png" alt={ "API key : "+w.apiKey } title={ w.apiKey } />
+             <span class="key">{ w.apiKey }</span>)
        & ".createdAt *" #> TimeHelpers.dateFormatter.format(w.createdAt.is)
        & ".allowed *" #> { LocalOpenIDVendor.currentUser.get match {
           case u if u.toString == w.username.is.toString => Text("")
@@ -66,10 +69,7 @@ class AllowedUserSnippet extends Logger {
     email match {
       case null => "/images/unknownUser.png"
       case s if s.trim=="" => "/images/unknownUser.png"
-      case _ =>
-        val digest = MessageDigest.getInstance("MD5").digest(email.toLowerCase().trim.getBytes("UTF-8"))
-        val hexDigest = BigInt(1,digest).toString(16)
-        "http://www.gravatar.com/avatar/"+hexDigest+"?d=monsterid&s="+iconSize
+      case _ => "http://www.gravatar.com/avatar/"+AllowedUser.md5hash(email.toLowerCase().trim)+"?d=monsterid&s="+iconSize
     }
   }
 

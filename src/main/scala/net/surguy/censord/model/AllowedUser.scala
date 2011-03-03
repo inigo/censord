@@ -5,6 +5,7 @@ import org.openid4java.discovery.Identifier
 import java.util.Date
 import net.liftweb.common.{Empty, Logger, Full, Box}
 import net.liftweb.sitemap.{Menu, Loc}
+import java.security.MessageDigest
 
 /**
  * A user of the system. The "allowed" flag determines whether the user is able to use the system,
@@ -19,6 +20,7 @@ class AllowedUser extends LongKeyedMapper[AllowedUser] {
   def primaryKeyField = id
   object id extends MappedLongIndex(this)
   object username extends MappedString(this, 255)
+  object apiKey extends MappedString(this, 255)
   object allowed extends MappedBoolean(this)
   object email extends MappedEmail(this, 255)
   object realName extends MappedPoliteString(this, 255)
@@ -45,10 +47,16 @@ object AllowedUser extends AllowedUser with LongKeyedMetaMapper[AllowedUser] wit
   def createIfNew(username: String): AllowedUser = {
     find(By(AllowedUser.username, username)).openOr{
       val isFirstUser = AllowedUser.count==0
-      val newUser = AllowedUser.create.username(username).allowed(isFirstUser).createdAt(new Date())
+      val key = md5hash(""+math.random+System.currentTimeMillis)
+      val newUser = AllowedUser.create.username(username).allowed(isFirstUser).createdAt(new Date()).apiKey(key)
       newUser.save()
       newUser
     }
+  }
+
+  def md5hash(text: String) = {
+    val digest = MessageDigest.getInstance("MD5").digest(text.getBytes("UTF-8"))
+    BigInt(1,digest).toString(16)
   }
 
 }

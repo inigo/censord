@@ -238,3 +238,32 @@ h1 {
  margin: 5px 0px;
 }
 
+#list .userlist .apiKey img {
+  vertical-align: middle;
+  position: relative;
+  top: -3px;
+  margin-left: 15px;
+}
+
+#list .userlist th.apiKey, #list .userlist td.apiKey {
+  min-width: 80px;
+}
+
+#list .userlist .key {
+  display: none;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+  font-size: 0.7em;
+}
+
+#list .userlist th.createdAt, #list .userlist td.createdAt {
+  min-width: 7em;
+}
+
+#list .userlist th.delete, #list .userlist td.delete {
+ min-width: 5em;
+}
+
+#list .userlist th.allowed, #list .userlist td.allowed {
+ min-width: 9em;
+}

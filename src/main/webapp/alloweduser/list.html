@@ -6,9 +6,10 @@
                     <th></th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>First seen</th>
-                    <th></th>
-                    <th></th>
+                    <th class="apiKey">API key</th>
+                    <th class="createdAt">First seen</th>
+                    <th class="allowed"></th>
+                    <th class="delete"></th>
                 </tr>
             </thead>
             <tbody class="lift:allowedUserSnippet.list">
@@ -16,6 +17,7 @@
                     <td class="icon">[<img src="/images/gravatar.png" width="42" height="42" alt=""/> ]</td>
                     <td class="realName">[Some Name]</td>
                     <td class="email">[something@example.com]</td>
+                    <td class="apiKey"><img alt="" src="/images/apiKey.png"/></td>
                     <td class="createdAt">[some date]</td>
                     <td class="allowed">[Yes/No]<button value="Toggle"></button></td>
                     <td class="delete"><button value="Delete"></button> </td>
@@ -23,5 +25,15 @@
             </tbody>
         </table>
     </div>
+
+    <head>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $(".apiKey img").click(function() {
+                    $(".apiKey .key").toggle();
+                });
+            });
+        </script>
+    </head>
 </div>
 
