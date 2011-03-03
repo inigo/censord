@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.surguy</groupId>
     <artifactId>censord</artifactId>
-    <version>1.1</version>
+    <version>1.2-SNAPSHOT</version>
     <name>censord</name>
     <description>Profanity checking web service</description>
     <url>https://github.com/inigo/censord</url>
