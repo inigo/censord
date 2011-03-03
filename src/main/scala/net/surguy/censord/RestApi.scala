@@ -17,11 +17,16 @@ object RestApi extends RestHelper {
   /** Determine which requests we will respond to - this is called via the dispatch table set up in Boot. */
   serve {
     case "api" :: "check" :: _ Get _ => for {text <- S.param("text") ?~ "Param 'text' is missing"} yield checkText(text)
-//    case "api" :: "terms" :: _ Post _ =>
-//      for {text <- S.param("phrase") ?~ "Param 'phrase' is missing"} yield addPhrase(text)
+    case "api" :: "terms" :: _ Post _ =>
+      (for {text <- S.param("terms") ?~ "Param 'terms' is missing";
+            key <- S.param("apiKey") ?~ "Param 'apiKey' is missing" if AllowedUser.isValid(key)}
+              yield addPhrase(text)) ?~ "apiKey is invalid"
     case "api" :: "terms" :: _ Get _ =>
       (for {key <- S.param("apiKey") ?~ "Param 'apiKey' is missing" if AllowedUser.isValid(key)}
         yield getTerms()) ?~ "apiKey is invalid"
+    case "api" :: "users" :: _ Get _ =>
+      (for {key <- S.param("apiKey") ?~ "Param 'apiKey' is missing" if AllowedUser.isValid(key)}
+        yield getUsers()) ?~ "apiKey is invalid"
   }
 
   def checkText(text: String) = {
@@ -42,5 +47,6 @@ object RestApi extends RestHelper {
   }
 
   def getTerms() = <terms> {for (phrase <- Phrase.findAll) yield phrase.toXml } </terms>
+  def getUsers() = <users> {for (user <- AllowedUser.findAll) yield user.toXml } </users>
 
 }

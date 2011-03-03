@@ -26,6 +26,12 @@ class AllowedUser extends LongKeyedMapper[AllowedUser] {
   object realName extends MappedPoliteString(this, 255)
 
   object createdAt extends MappedDateTime(this)
+
+  override def toXml = <user allowed={""+allowed} apiKey={""+apiKey}>
+                         <username>{username}</username>
+                         <email>{email}</email>
+                         <realName>{realName}</realName>
+                       </user>
 }
 
 /**
