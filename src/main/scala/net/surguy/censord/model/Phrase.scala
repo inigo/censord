@@ -23,6 +23,8 @@ class Phrase extends LongKeyedMapper[Phrase] {
 
   object createdAt extends MappedDateTime(this)
 //  object createdBy extends MappedForeignKey(this)
+
+  override def toXml = <term stemming={ ""+stemming }>{word}</term>
 }
 
 object Phrase extends Phrase with LongKeyedMetaMapper[Phrase] with CRUDify[Long, Phrase] {

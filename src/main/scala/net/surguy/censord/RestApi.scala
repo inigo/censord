@@ -4,6 +4,7 @@ import model.Phrase
 import net.liftweb.http._
 import net.liftweb.http.rest._
 import java.util.Date
+import net.surguy.censord.model.AllowedUser
 
 /**
  * Respond to REST requests to the /api/ path.
@@ -15,10 +16,12 @@ object RestApi extends RestHelper {
 
   /** Determine which requests we will respond to - this is called via the dispatch table set up in Boot. */
   serve {
-    // @todo Provide statistics on API usage
     case "api" :: "check" :: _ Get _ => for {text <- S.param("text") ?~ "Param 'text' is missing"} yield checkText(text)
-    // @todo Allow trusted users with an API key to download all current words via REST
-//    case "api" :: "add" :: _ Post _ => for {text <- S.param("phrase") ?~ "Param 'phrase' is missing"} yield addPhrase(text)
+//    case "api" :: "terms" :: _ Post _ =>
+//      for {text <- S.param("phrase") ?~ "Param 'phrase' is missing"} yield addPhrase(text)
+    case "api" :: "terms" :: _ Get _ =>
+      (for {key <- S.param("apiKey") ?~ "Param 'apiKey' is missing" if AllowedUser.isValid(key)}
+        yield getTerms()) ?~ "apiKey is invalid"
   }
 
   def checkText(text: String) = {
@@ -37,5 +40,7 @@ object RestApi extends RestHelper {
     Phrase.createMultiplePhrases(phrase)
     <span class="add success">{ "New entry '"+phrase+"' created" }</span>
   }
+
+  def getTerms() = <terms> {for (phrase <- Phrase.findAll) yield phrase.toXml } </terms>
 
 }

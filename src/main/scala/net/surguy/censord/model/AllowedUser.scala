@@ -59,5 +59,6 @@ object AllowedUser extends AllowedUser with LongKeyedMetaMapper[AllowedUser] wit
     BigInt(1,digest).toString(16)
   }
 
+  def isValid(key: String) = find(By(AllowedUser.apiKey, key), By(AllowedUser.allowed, true)).isDefined
 }
 
