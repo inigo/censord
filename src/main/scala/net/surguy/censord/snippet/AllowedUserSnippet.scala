@@ -37,9 +37,9 @@ class AllowedUserSnippet extends Logger {
          ".icon *" #> <img src={ gravatarUrl(w.email.is) } alt={ w.username } title={ w.username } width={iconSize} height={iconSize} />
        & ".realName *" #> w.realName
        & ".email *" #> w.email
-       & ".apiKey *" #> Group(
+       & ".apiKey *" #> Group( // The empty span here stops double-click from selecting the image too
              <img src="/images/apiKey.png" alt={ "API key : "+w.apiKey } title={ w.apiKey } />
-             <span class="key">{ w.apiKey }</span>)
+             <span> </span><span class="key">{ w.apiKey }</span>)
        & ".createdAt *" #> TimeHelpers.dateFormatter.format(w.createdAt.is)
        & ".allowed *" #> { LocalOpenIDVendor.currentUser.get match {
           case u if u.toString == w.username.is.toString => Text("")
