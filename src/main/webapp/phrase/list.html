@@ -8,7 +8,6 @@
             </thead>
             <tbody class="lift:phrasesSnippet.list">
                 <tr class="line">
-                    <!-- @todo Display both the word and the starred-out w*rd, and use JS to switch between them -->
                     <td class="word">[http://someSite/userName]</td>
                     <td class="stemming">[Yes/No]<button value="Toggle"></button></td>
                     <td class="delete"><button value="Delete"></button> </td>
@@ -17,9 +16,23 @@
         </table>
     </div>
 
+    <button id="toggleRude">Reveal</button>
+
     <div id="createNewWords">
         <div class="lift:phraseCreateSnippet"></div>
     </div>
 
-</div>
 
+    <head>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#toggleRude").click(function() {
+                    $(".rude").toggle();
+                    $(".filtered").toggle();
+                    $("#toggleRude").text(  $("#toggleRude").text()=="Reveal" ? "Hide" : "Reveal" );
+                });
+            });
+        </script>
+    </head>
+
+</div>

@@ -198,6 +198,10 @@ h1 {
   padding-top: 6px;
 }
 
+#list .phraselist .rude {
+    display: none;
+}
+
 /* The check page */
 
 #checkText textarea {

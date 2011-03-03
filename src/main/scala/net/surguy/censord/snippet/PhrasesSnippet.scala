@@ -4,9 +4,9 @@ import net.liftweb.util.BindHelpers._
 import net.liftweb.util.CssBind
 import net.surguy.censord.model.Phrase
 import net.liftweb.http.SHtml
-import xml.Text
 import net.liftweb.http.js.JsCmds.{Run, SetHtml}
 import _root_.net.liftweb.http.SHtml._
+import xml.{Group, Text}
 
 /**
  * Manage the list of words that should be checked for.
@@ -17,7 +17,9 @@ import _root_.net.liftweb.http.SHtml._
 class PhrasesSnippet {
 
   def list(): CssBind = ".line *" #> Phrase.findAll.map(
-    w => ".word *" #> w.word
+    w => ".word *" #>
+          Group(<span class="rude">{ w.word }</span>
+                <span class="filtered">{ disemvowel(w.word) }</span>)
        & ".stemming *" #> {
           val id = "itemStemming"+w.primaryKeyField.is
           def txt() = if (w.stemming.is) Text("Yes") else Text("No")
@@ -34,5 +36,7 @@ class PhrasesSnippet {
           Run("window.location.reload()") // Runs arbitrary JavaScript
         })
   )
+
+  def disemvowel(text: String) = text.replaceAll("[aeiouAEIOU]","*")
 
 }
