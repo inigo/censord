@@ -94,7 +94,24 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* Lists */
+h2 {
+  font-weight: bold;
+  margin-bottom: 0.6em;
+}
+
+#contentContainer ul {
+  list-style: circle;
+  margin-left: 2em;
+  width: 50em;
+  padding-top: 0.4em;
+  line-height: 1.2em;
+}
+
+#contentContainer li {
+  padding-top: 0.4em;
+}
+
+/* Tables listing items */
 #list td, #list th {
   padding: 2px;
   min-width: 10em;
@@ -187,6 +204,11 @@ button:active {
   margin-left: 1em;
   height: 5em;
   width: 25em;
+}
+
+#createNewWords button {
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 #list .phraselist .stemming span {

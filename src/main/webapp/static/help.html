@@ -1,0 +1,14 @@
+<div class="lift:surround?with=default;at=content">
+  <h2>The REST API</h2>
+  <p>
+      You must have an API key to use most REST API operations. Retrieve your API key from the users page.
+  </p>
+  <ul>
+    <li>GET api/check?text=[text to check] - checks the supplied text against the current terms</li>
+    <li>GET api/terms?apiKey=[apiKey] - get the current list of terms in XML</li>
+    <li>POST api/terms?apiKey=[apiKey]&amp;terms=[terms] - adds the comma-separated list of terms to the database,
+        enabling stemming for terms ending in *.</li>
+    <li>GET api/users?apiKey=[apiKey] - get the current list of users in XML</li>
+  </ul>
+
+</div>

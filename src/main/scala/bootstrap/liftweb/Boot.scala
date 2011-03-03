@@ -57,6 +57,7 @@ class Boot {
       , Menu(S ? "Login") / "login" >> notLoggedIn
       , Menu(S ? "Terms") / "phrase/list" >> loggedIn
       , Menu(S ? "Users") / "alloweduser/list" >> loggedIn
+      , Menu(S ? "Help") / "static" / "help" >> loggedIn
       // These entries need to be in the SiteMap, or they cannot be accessed - but should not be directly visible
       , Menu(S ? "Hidden") / "hidden" >> Hidden submenus {
           Menu(S ? "HiddenLoggedInOnly") / "log" >> loggedIn submenus {
