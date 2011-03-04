@@ -20,3 +20,6 @@ project/build/target
 .svn
 
 *.db
+
+# Ignore cloudbees deployment script
+deploy-to-cloudbees.sh
