@@ -20,3 +20,7 @@ project/build/target
 .svn
 
 *.db
+
+# Cloud hosting
+deploy-to-cloudbees.sh
+gae-password.txt
