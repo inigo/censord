@@ -19,6 +19,7 @@ import net.surguy.censord.{LocalOpenIDVendor, RestApi}
  */
 class Boot {
   def boot {
+    DefaultConnectionIdentifier.jndiName = Props.get("db.jndiName") openOr "jdbc/censord"
     if (!DB.jndiJdbcConnAvailable_?) {
       val vendor = new StandardDBVendor(Props.get("db.driver") openOr "org.h2.Driver",
 			     Props.get("db.url") openOr 
