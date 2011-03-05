@@ -38,3 +38,56 @@ of the JQuery OpenID plugin.
 
 The "Censord" image is public domain, created by Piotr VaGla Waglowski, and edited by Inigo Surguy.
 
+Deploying to CloudBees
+----------------------
+
+CloudBees is a cloud platform-as-a-service for JVM webapps. It is currently free.
+
+To deploy an instance of censord to CloudBees:
+
+* Sign up for an account at https://grandcentral.cloudbees.com/account/signup
+* Create a new application on the CloudBees site
+* Create a new database on the CloudBees site
+* Edit src/main/webapp/WEB-INF/web.xml and comment in the jdbc/censord resource-ref
+* Edit deploy.properties and set the database name, username and password to the values for the new CloudBees database
+* Run mvn install
+* On the CloudBees site, upload the generated WAR from the target/ directory
+
+This will create a working censord instance.
+
+
+Deploying to CloudBees repeatedly
+---------------------------------
+
+To easily deploy new versions to CloudBees repeatedly:
+
+* Edit your ~/.m2/settings.xml to add:
+    <pluginGroups>
+        <pluginGroup>com.cloudbees</pluginGroup>
+    </pluginGroups>
+
+    <profiles>
+        <profile>
+           <id>cloudbees</id>
+           <pluginRepositories>
+             <pluginRepository>
+               <id>bees-plugins-snapshots</id>
+               <url>http://repository-cloudbees.forge.cloudbees.com/public-snapshot </url>
+                <releases>
+                    <enabled>true</enabled>
+                </releases>
+             </pluginRepository>
+           </pluginRepositories>
+        </profile>
+    </profiles>
+
+    <activeProfiles>
+       <activeProfile>cloudbees</activeProfile>
+    </activeProfiles>
+
+(adding to the existing pluginGroups, profiles, and activeProfiles elements if they already exist)
+
+* From the CloudBees Account | Security Keys page, note your API key and secret key
+* Run mvn com.cloudbees.bees:deploy -Dbees.appid=[appid] -Dbees.apikey=[apikey] -Dbees.secret=[secret]
+
+This will build and deploy a new version of the application to CloudBees
