@@ -88,6 +88,6 @@ To easily deploy new versions to CloudBees repeatedly:
 (adding to the existing pluginGroups, profiles, and activeProfiles elements if they already exist)
 
 * From the CloudBees Account | Security Keys page, note your API key and secret key
-* Run mvn com.cloudbees.bees:deploy -Dbees.appid=[appid] -Dbees.apikey=[apikey] -Dbees.secret=[secret]
+* Run mvn bees:deploy -Dbees.appid=[appid] -Dbees.apikey=[apikey] -Dbees.secret=[secret]
 
 This will build and deploy a new version of the application to CloudBees
