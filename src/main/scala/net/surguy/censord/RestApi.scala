@@ -17,6 +17,7 @@ object RestApi extends RestHelper {
   /** Determine which requests we will respond to - this is called via the dispatch table set up in Boot. */
   serve {
     case "api" :: "check" :: _ Get _ => for {text <- S.param("text") ?~ "Param 'text' is missing"} yield checkText(text)
+    case "api" :: "check" :: _ Post _ => for {text <- S.param("text") ?~ "Param 'text' is missing"} yield checkText(text)
     case "api" :: "terms" :: _ Post _ =>
       (for {text <- S.param("terms") ?~ "Param 'terms' is missing";
             key <- S.param("apiKey") ?~ "Param 'apiKey' is missing" if AllowedUser.isValid(key)}
